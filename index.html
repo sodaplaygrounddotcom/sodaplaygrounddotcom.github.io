@@ -431,11 +431,25 @@ function getFields() {
 }
 function loadTable(data) {
   //fields = Object.keys(data[0]); // sometimes fields are missing in first row
+  if (window.location.hash.indexOf('9qnw-vqnm') > -1) {
+    var dataToJoin = {}
+    dataToJoin["roster"] = JSON.parse($.ajax({
+        type: "GET",
+        url: "https://opendata.socrata.com/resource/aspn-jfpg.json?$limit=50000",
+        async: false
+    }).responseText);
+    var toJoin = {"userid": {"dataset": "roster", "field": "serial"}}
+  }
   fields = []
   $.each(data, function(i, row) {
     $.each(Object.keys(row), function(j, key) {
       if (fields.indexOf(key) == -1) {
         fields.push(key);
+        if (Object.keys(toJoin).indexOf(key) > -1) {
+          $.each(Object.keys(dataToJoin["roster"][toJoin[key]][0]), function(i, f) {
+            fields.push(key+'__'+f);
+          })
+        }
       }
     });
   });
