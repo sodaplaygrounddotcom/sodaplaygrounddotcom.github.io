@@ -339,7 +339,9 @@ function loadTable(data) {
   //$('#data').text(JSON.stringify(data));
 }
 function getData() {
-  
+  if (window.location.hash == '') {
+    return
+  }
   if (window.location.hash.indexOf('.json') > -1 && window.location.hash.indexOf('$order=') == -1 && window.location.hash.indexOf('$group=') == -1) {
     var newpart = '';
     
