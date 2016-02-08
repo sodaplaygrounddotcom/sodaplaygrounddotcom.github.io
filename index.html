@@ -499,6 +499,7 @@ function getData() {
   if (window.location.hash == '') {
     return
   }
+  hideMapTable();
   if (window.location.hash.indexOf('.json') > -1 && window.location.hash.indexOf('$order=') == -1 && window.location.hash.indexOf('$group=') == -1) {
     var newpart = '';
     
@@ -588,14 +589,17 @@ function run() {
     $('#url').trigger('input');
     window.urlElements = urlElements;
 }
+function hideMapTable() {
+  if (window.location.hash != '') {
+    $('#map_table').hide();
+  }
+}
 $(function() {
   
   $('#map_table').width($(window).width()); // css 100% isn't working
   $('#map').height($(window).height()-$('#header').height());
   console.log('for hiding map '+window.location.hash)
-  if (window.location.hash != '') {
-    $('#map_table').hide();
-  }
+  hideMapTable();
   setTimeout(function() {$('#data').doubleScroll();},2000);
   $('#go').click(function(e) {
     getFields($('#api_id').val());
