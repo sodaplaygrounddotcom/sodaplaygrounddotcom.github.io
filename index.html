@@ -481,8 +481,19 @@ function loadTable(data) {
         hashUrlForFiltering = window.location.hash;
       }
       hashUrlForFiltering = hashUrlForFiltering + '?' + col + '=' + escape(row[col])
-      
-      if (String(row[col]).indexOf('http') > -1) {
+      if (col.indexOf('__') > -1) {
+          //var toJoin = {"userid": {"dataset": "roster", "field": "serial"}}
+          var base_field = col.substring(0, col.indexOf('__'));
+          var theToJoin = toJoin[base_field];
+          var theData = dataToJoin[theToJoin["dataset"]];
+          var lookForField = theToJoin["serial"]
+          var lookForValue = row[base_field];
+          $.each(theData, function(j, theDataRow) {
+            if (theDataRow[lookForField] == lookForValue) {
+              table_html = theDataRow[col.substring(col.indexOf('__')+2)];
+            } 
+          })
+        } else if (String(row[col]).indexOf('http') > -1) {
         table_html += '<a href="'+row[col]+'" class="filter_url">'+row[col]+'</a>';
       } else if (String(row[col]) == 'undefined') {
         table_html += '';
@@ -495,18 +506,6 @@ function loadTable(data) {
         // highlight search words
         if ($('#q').val()) {
           table_html += row[col].split($('#q').val()).join('<span class="highlight">'+$('#q').val()+'</span>');
-        } else if (col.indexOf('__') > -1) {
-          //var toJoin = {"userid": {"dataset": "roster", "field": "serial"}}
-          var base_field = col.substring(0, col.indexOf('__'));
-          var theToJoin = toJoin[base_field];
-          var theData = dataToJoin[theToJoin["dataset"]];
-          var lookForField = theToJoin["serial"]
-          var lookForValue = row[base_field];
-          $.each(theData, function(j, theDataRow) {
-            if (theDataRow[lookForField] == lookForValue) {
-              table_html = theDataRow[col.substring(col.indexOf('__')+2)];
-            } 
-          })
         } else {
           table_html += row[col];
         }
