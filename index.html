@@ -592,6 +592,7 @@ $(function() {
   
   $('#map_table').width($(window).width()); // css 100% isn't working
   $('#map').height($(window).height()-$('#header').height());
+  console.log('for hiding map '+window.location.hash)
   if (window.location.hash != '') {
     $('#map_table').hide();
   }
