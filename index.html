@@ -1,0 +1,558 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<script type="text/javascript"> if (!window.console) console = {log: function() {}}; </script>
+<title>SODA Plus</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="googlebot" content="noindex, nofollow">
+
+  
+  
+
+  
+  
+  
+
+  
+
+  
+    
+      <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+  <script src="https://cdn.rawgit.com/avianey/jqDoubleScroll/master/jquery.doubleScroll.js"></script>
+
+  <style type="text/css">
+  #header a:link, #header a:visited {
+    color:#FFF;
+  }
+  table {
+  overflow:auto;
+  }
+  body {
+  font:.9em sans-serif;
+  margin:0;
+  }
+    ul ul {
+  padding-left:20px;
+}
+#right_sidebar {
+  float:right;
+  width:300px;
+}
+.highlight {
+  background:yellow;
+}
+td, th {
+  border:1px solid #000;
+  padding:3px;
+  vertical-align:top;
+  text-align:left;
+}
+table {
+  border-collapse:collapse;
+}
+#header {
+background:#000;
+color:#FFF;
+padding:10px;
+}
+#data {
+margin-right:200px;
+border-right:1px solid #000;
+overflow:auto;
+}
+.ui-autocomplete {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  float: left;
+  display: none;
+  min-width: 160px;
+  _width: 160px;
+  padding: 4px 0;
+  margin: 2px 0 0 0;
+  list-style: none;
+  background-color: #ffffff;
+  border-color: #ccc;
+  border-color: rgba(0, 0, 0, 0.2);
+  border-style: solid;
+  border-width: 1px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  -webkit-background-clip: padding-box;
+  -moz-background-clip: padding;
+  background-clip: padding-box;
+  *border-right-width: 2px;
+  *border-bottom-width: 2px;
+
+  .ui-menu-item > a.ui-corner-all {
+    display: block;
+    padding: 3px 15px;
+    clear: both;
+    font-weight: normal;
+    line-height: 18px;
+    color: #555555;
+    white-space: nowrap;
+
+    &.ui-state-hover, &.ui-state-active {
+      color: #ffffff;
+      text-decoration: none;
+      background-color: #0088cc;
+      border-radius: 0px;
+      -webkit-border-radius: 0px;
+      -moz-border-radius: 0px;
+      background-image: none;
+    }
+  }
+}
+input[type=text] {
+  border:1px solid #000;
+}
+#header input[type=text] {
+  border:1px solid #FFF;
+  background:#000;
+  color:#FFF;
+}
+  </style>
+
+  <title></title>
+
+  
+    
+
+
+
+
+
+  
+</head>
+
+<body>
+<div id="header"><a href="http://funwithsoda.github.io/sodaplus.html">SODA Plus</a>: A project in the early stages to provide a GUI for generating Socrata API urls, doing advanced display of data, and allowing subscription to new results to queries. 
+<br/><strong>Domain:</strong> <input type="text" id="domains" /> 
+<strong>Dataset:</strong> <input type="text" id="dataset" />
+<input type="button" id="go_to_official_frontend" value="Go to official frontend" c/>
+</div>
+  <strong>Url:</strong> <input style="width:80%" type="text" id="url" /> <span id="number_of_rows"></span> rows
+  <div id="right_sidebar">
+
+<ul>
+<li><input type="button" value="Go to view without any parameters" id="go_to_main_view" /></li>
+<li><strong>Query:</strong> <input id="q" /><input type="button" id="q_go" value="Go" /><input type="button" value="Clear" id="q_clear" /></li>
+<li><strong>Simple filtering:</strong> <ul id="simple_filtering_fields">
+ 
+</ul></li>
+<li>
+<strong>Select:</strong><br/>
+<input type="button" value="Select all (great for quickly unselecting what you don't want)" id="select_all" />
+<ul id="fields"> 
+
+</ul></li>
+<li><strong>Where:</strong></li>
+<li><strong>Group:</strong>
+<ul id="group_fields"> 
+
+</ul>
+</li>
+<li><strong>Offset:</strong> <input type="text" id="offset" /></li>
+<li><strong>Limit:</strong> <input type="text" id="limit" /></li>
+<li><strong>Order:</strong></li>
+</ul>
+</div>
+<div id="data">
+
+</div>
+<script type='text/javascript'>//<![CDATA[
+function getJsonFromUrl() {
+  var url = window.location.hash;
+  console.log(url);
+  if (url.indexOf('?') > -1) {
+    query = url.substring(url.indexOf('?')+1);
+    var result = {};
+    query.split("&").forEach(function(part) {
+      var item = part.split("=");
+      result[item[0]] = decodeURIComponent(item[1]);
+    });
+    return result;
+  } else {
+    return {}
+  }
+  
+}
+function updateQueryGUI() {
+  urlJson = getJsonFromUrl();
+  if (Object.keys(urlJson).indexOf('$q') > -1) {
+    console.log('is in');
+    $('#q').val(urlJson['$q']);
+  }
+  if (Object.keys(urlJson).indexOf('$select') > -1) {
+    var selects = urlJson['$select'].split(',');
+    $.each(selects, function(i, v) {
+      setTimeout(function(){$('input[value="'+v+'"].select').prop('checked', true);},1000);
+    });
+    
+  }
+  if (Object.keys(urlJson).indexOf('$group') > -1) {
+    var selects = urlJson['$group'].split(',');
+    $.each(selects, function(i, v) {
+      setTimeout(function(){$('input[value="'+v+'"].group').prop('checked', true);},1000);
+    });
+    
+  }
+  console.log(JSON.stringify(urlJson));
+}
+function getItemsForField(field) {
+  window.urlElements = getJsonFromUrl();
+  console.log('THE URL ELEMENTS '+window.urlElements)
+  $.get('https://'+domain+'/resource/'+datasetID+'.json?$select='+field+'&$group='+field+'&$limit=500', function(data) {
+    var selectedHtml = '';
+    if (!(Object.keys(window.urlElements).indexOf(field) > -1)) {
+      selectedHtml = ' selected';
+    }
+    $('#simple_filtering_field__'+field).append('<option'+selectedHtml+'></option>');
+    $.each(data, function(i, item) {
+      if (String(item[field]) != 'undefined') {
+        var selectedHtml = '';
+        if (Object.keys(window.urlElements).indexOf(field) > -1) {
+          if (item[field] == window.urlElements[field]) {
+            selectedHtml = ' selected';
+          }
+        }
+        $('#simple_filtering_field__'+field).append('<option'+selectedHtml+'>'+item[field]+'</option>');
+      }
+    });
+  });
+}
+function getFields() {
+  if (window.location.hash.indexOf('?') > -1) {
+    var base_url = window.location.hash.substring(1, window.location.hash.indexOf('?'));
+  } else {
+    var base_url = window.location.hash.substring(1);
+  }
+  $.get(base_url+'?$limit=1', function(data) {
+    var fields = Object.keys(data[0]).concat([':id', ':created_at', ':updated_at', 'count(*)']);
+    var fields_checkboxes = '';
+    if (window.location.hash.indexOf('?') > -1) {
+      var base_url = window.location.hash.substring(1, window.location.hash.indexOf('?'));
+    } else {
+      var base_url = window.location.hash.substring(1);
+      
+    }
+    console.log('base url '+base_url)
+    window.base_url = base_url;
+    url = base_url;
+    //$('#url').val(url);
+    $.each(fields, function(i, v) {
+      fields_checkboxes += '<li><input type="checkbox" value="'+v+'" class="select" /> '+v+'</li>';
+    });
+    $('#fields').html(fields_checkboxes);
+    var simple_filtering_fields = '';
+    $.each(fields, function(i, v) {
+      simple_filtering_fields += '<li><strong>'+v+'</strong>: <select id="simple_filtering_field__'+v+'" data-field="'+v+'"></select></li>';
+      getItemsForField(v);
+    });
+    $('#simple_filtering_fields').html(simple_filtering_fields);
+    group_fields_html = ''
+    $.each(fields, function(i, v) {
+      group_fields_html += '<li><input type="checkbox" value="'+v+'" class="group" /> '+v+'</li>';
+    });
+    $('#group_fields').html(group_fields_html);
+  });
+}
+function loadTable(data) {
+  //fields = Object.keys(data[0]); // sometimes fields are missing in first row
+  fields = []
+  $.each(data, function(i, row) {
+    $.each(Object.keys(row), function(j, key) {
+      if (fields.indexOf(key) == -1) {
+        fields.push(key);
+      }
+    });
+  });
+  table_html = '<table>';
+  table_html += '<tr>';
+  $.each(fields, function(i, v) {
+    if (v == 'address') {
+        table_html += '<th>Streetview</th>';
+      }
+    table_html += '<th>'+v+'</th>';
+  })
+  table_html += '</tr>';
+  $.each(data, function(i, row) {
+    table_html += '<tr>';
+    $.each(fields, function(j, col) {
+      if (col == 'address') {
+        var ending = '';
+        if (window.location.hash.indexOf('seattle') > -1) {
+          ending = ' seattle, wa';
+        } else if (fields.indexOf('location_city') > -1) {
+          ending = ', '+row['location_city']+', '+row['location_state'];
+        }
+        table_html += '<td><img src="https://maps.googleapis.com/maps/api/streetview?size=100x100&location='+row['address']+ending+'" /></td>';
+      }
+      table_html += '<td>';
+      if (window.location.hash.indexOf('?') > -1) {
+        hashUrlForFiltering = window.location.hash.substring(0,window.location.hash.indexOf('?'));
+      } else {
+        hashUrlForFiltering = window.location.hash;
+      }
+      hashUrlForFiltering = hashUrlForFiltering + '?' + col + '=' + escape(row[col])
+      
+      if (String(row[col]).indexOf('http') > -1) {
+        table_html += '<a href="'+row[col]+'" class="filter_url">'+row[col]+'</a>';
+      } else if (String(row[col]) == 'undefined') {
+        table_html += '';
+      
+      } else if (String(row[col]) == '[object Object]') {
+        table_html += JSON.stringify(row[col]);
+      } else if (String(row[col]).length < 50) {
+        table_html += '<a href="'+hashUrlForFiltering+'" class="filter_url">'+row[col]+'</a>';
+      } else {
+        // highlight search words
+        if ($('#q').val()) {
+          table_html += row[col].split($('#q').val()).join('<span class="highlight">'+$('#q').val()+'</span>');
+        } else {
+          table_html += row[col];
+        }
+      }
+      table_html += '</td>';
+      
+    })
+    table_html += '</tr>';
+  })
+  table_html += '</table>';
+  $('#data').html(table_html);
+  setTimeout(function() {$('#data').doubleScroll();},2000);
+  //$('#data').text(JSON.stringify(data));
+}
+function getData() {
+  
+  if (window.location.hash.indexOf('.json') > -1 && window.location.hash.indexOf('$order=') == -1 && window.location.hash.indexOf('$group=') == -1) {
+    var newpart = '';
+    
+    if (window.location.hash.indexOf('?') == -1) {
+      newpart = '?';
+    } else {
+      newpart = '&';
+    }
+    newpart += '$order=:created_at%20DESC';
+    window.location.hash += newpart;
+    return
+  }
+ 
+  if (window.location.hash.substring(1)) {
+    urlToGet = window.location.hash.substring(1);
+  } else {
+    urlToGet = $('#url').val();
+  }
+  if (urlToGet.indexOf('$limit=') == -1) {
+    if (urlToGet.endsWith('json')) {
+      urlToGet += '?'
+    } else {
+      urlToGet += '&'
+    
+    }
+    urlToGet += '$limit=100'
+  }
+  console.log('going to url '+urlToGet);
+  window.domain = window.location.hash.substring(9,window.location.hash.substring(9).indexOf('/')+9);
+  window.datasetID = window.location.hash.substring(window.location.hash.indexOf('/resource/')+10, window.location.hash.indexOf('.json'));
+  document.title = $('#dataset').val() + ' | ' + $('#domains').val();
+  if (urlToGet.indexOf('.json') > -1) {
+    getFields();
+    $.get('https://'+domain+'/resource/'+datasetID+'.json?$select=count(*)', function(data) {
+      $('#number_of_rows').text(parseInt(data[0]['count']).toLocaleString('en-US'));
+    });
+    $.get(urlToGet, function(data) {
+        loadTable(data);
+    }).fail(function(data) {console.log('yes');
+        $('#data').text(JSON.stringify(data));
+    });
+  }
+}
+
+function run() {
+  urlElements = {}
+  var selected = [];
+  var grouped = [];
+  var simpleFilters = {};
+    $('input[type=checkbox].select').each(function(v) {
+      if ($(this).is(':checked')) {
+        selected.push($(this).val());
+      }
+      
+    });
+    $('#simple_filtering_fields select').each(function(v) {
+      if ($(this).find('option:selected').text()) {
+        simpleFilters[$(this).attr('data-field')] = $(this).find('option:selected').text();
+      }
+    });
+    $('input[type=checkbox].group').each(function(v) {
+      if ($(this).is(':checked')) {
+        grouped.push($(this).val());
+      }
+      
+    });
+    if (Object.keys(simpleFilters).length > 0) {
+      $.each(Object.keys(simpleFilters), function(i, v) {
+        urlElements[v] = simpleFilters[v];
+      });
+    }
+    if (selected.length > 0) {
+      urlElements['$select'] = selected.join();
+    }
+    if (grouped.length > 0) {
+      urlElements['$group'] = grouped.join();
+    }
+    if ($('#q').val()) {
+      urlElements['$q'] = $('#q').val();
+    }
+    joinedUrlElements = []
+    $.each(Object.keys(urlElements), function(i, v) {
+      joinedUrlElements.push(v + '=' + urlElements[v])
+    });
+    url = window.base_url + '?' + joinedUrlElements.join('&');
+    $('#url').val(url);
+    $('#url').trigger('input');
+    window.urlElements = urlElements;
+}
+$(function() {
+  setTimeout(function() {$('#data').doubleScroll();},2000);
+  $('#go').click(function(e) {
+    getFields($('#api_id').val());
+  });
+  $('body').on('change', 'input[type=checkbox], select', function(e) {
+    run()
+  });
+  $('#right_sidebar input').keyup(function(e){
+    if(e.keyCode == 13)
+    {
+        run()
+    }
+  });
+  $('#go').trigger('click');
+  $('#url').each(function() {
+  
+   var elem = $(this);
+
+   // Save current value of element
+   elem.data('oldVal', elem.val());
+
+   // Look for changes in the value
+   elem.bind("propertychange change click keyup input paste", function(event){
+      // If value has changed...
+      if (elem.data('oldVal') != elem.val()) {
+       // Updated stored value
+       elem.data('oldVal', elem.val());
+
+       // Do action
+       //alert('change');
+       window.location.hash = $('#url').val();
+       getData()
+     }
+   });
+ });
+    
+  //setTimeout(function() {$('#url').trigger('input');},1000);
+  $('#q_go').click(function() {
+    run();
+  });
+  updateQueryGUI();
+  domain = window.location.hash.substring(9,window.location.hash.substring(9).indexOf('/')+9);
+  $('#domains').val(domain);
+  console.log('domain parse '+domain+(window.location.hash.substring(9).indexOf('/')+9)+window.location.hash.substring(9))
+  
+  datasetID = window.location.hash.substring(window.location.hash.indexOf('/resource/')+10,window.location.hash.indexOf('.json'));
+  window.datasetID = datasetID;
+  console.log('dataset ID '+datasetID);
+  setTimeout(function() {getData();}, 1000);
+  $('body').on('click', '.filter_url', function(e) {
+    setTimeout(function(){getData();},500);
+  })
+  var domains = [];
+  $.get('http://api.us.socrata.com/api/catalog/v1/domains', function(data) {
+    data = data["results"];
+    $.each(data, function(i, v) {
+      domains.push(v['domain']);
+    });
+    $( "#domains" ).autocomplete({
+      source: domains
+    });
+  });
+  var datasets = [];
+  
+  $.get('http://funwithsoda.github.io/catalog.json', function(data) {
+    //data = JSON.parse(data);
+    window.datasetIDToDomain = data['datasets_to_domain'];
+    
+    window.allDatasets = data['datasets'];
+    if (window.location.hash.indexOf('.json') > -1) {
+      window.datasetID = window.location.hash.substring(window.location.hash.indexOf('/resource/')+10, window.location.hash.indexOf('.json'));
+      $.each(window.allDatasets, function(i, v) {
+        if (v.indexOf(window.datasetID) > -1) {
+          $('#dataset').val(v);
+        }
+      });
+    }
+    $( "#dataset" ).autocomplete({
+      source: window.allDatasets,
+      select: function(e, ui) {  
+        setTimeout(function(){$('#dataset').trigger('change');},1000);
+        
+      }
+    });
+  });
+  $('body').on('input propertychange paste autocompleteselect autocompletechange change autocompleteselect', '#dataset', function(e) {
+    console.log($(this).val());
+    if ($(this).val().indexOf(' | ') > -1) {
+      console.log('yes');
+      var datasetID = $(this).val().substring(0, $(this).val().indexOf(' | '));
+      console.log(datasetID+'*');
+      var domain = window.datasetIDToDomain[datasetID];
+      console.log(domain);
+      $('#domains').val(domain);
+      var newUrl = 'https://'+domain+'/resource/'+datasetID+'.json';
+      $('#url').val(newUrl);
+      $('#url').trigger('input');
+      //setTimeout(function() {getFields(domain, datasetID);}, 500);
+      
+    }
+  });
+  $(window).on('hashchange', function() {
+    
+    getData();
+    $('#url').val(window.location.hash.substring(1));
+  });
+  if (window.location.hash) {
+    $('#url').val(window.location.hash.substring(1));
+  }
+  $('body').on('click', '#go_to_main_view', function() {
+    window.location.hash = 'https://'+domain+'/resource/'+datasetID+'.json';
+    
+  });
+  $('body').on('click', '#select_all', function() {
+    $('.select').not("input[value='count(*)'].select").prop('checked', true)
+  });
+  $('body').on('click', '#dataset', function() {
+    $('#dataset').val('');
+  })
+  $('body').on('click', '#go_to_official_frontend', function() {
+    window.location = 'https://'+domain+'/resource/'+datasetID;
+  })
+})
+//]]> 
+
+</script>
+
+  
+</body>
+
+</html>
+
