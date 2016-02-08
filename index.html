@@ -440,7 +440,7 @@ function loadTable(data) {
     }).responseText);
     var toJoin = {"userid": {"dataset": "roster", "field": "serial"}}
   }
-  fields = []
+  fields = [];
   $.each(data, function(i, row) {
     $.each(Object.keys(row), function(j, key) {
       if (fields.indexOf(key) == -1) {
@@ -495,6 +495,18 @@ function loadTable(data) {
         // highlight search words
         if ($('#q').val()) {
           table_html += row[col].split($('#q').val()).join('<span class="highlight">'+$('#q').val()+'</span>');
+        } else if (col.indexOf('__') > -1) {
+          //var toJoin = {"userid": {"dataset": "roster", "field": "serial"}}
+          var base_field = col.substring(0, col.indexOf('__'));
+          var theToJoin = toJoin[base_field];
+          var theData = dataToJoin[theToJoin["dataset"]];
+          var lookForField = theToJoin["serial"]
+          var lookForValue = row[base_field];
+          $.each(theData, function(j, theDataRow) {
+            if (theDataRow[lookForField] == lookForValue) {
+              table_html = theDataRow[col.substring(col.indexOf('__')+2)];
+            } 
+          })
         } else {
           table_html += row[col];
         }
