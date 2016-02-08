@@ -484,6 +484,8 @@ function loadTable(data) {
       if (col.indexOf('__') > -1) {
           //var toJoin = {"userid": {"dataset": "roster", "field": "serial"}}
           var base_field = col.substring(0, col.indexOf('__'));
+          
+          console.log(base_field+' || '+col.substring(col.indexOf('__')+2))
           var theToJoin = toJoin[base_field];
           var theData = dataToJoin[theToJoin["dataset"]];
           var lookForField = theToJoin["serial"]
