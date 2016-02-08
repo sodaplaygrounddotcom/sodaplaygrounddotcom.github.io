@@ -123,6 +123,9 @@ input[type=text] {
 #head {
   background:orange;
 }
+#states_federal {
+  width:200px;
+}
   </style>
 
   <title></title>
@@ -287,7 +290,10 @@ input[type=text] {
 <strong>Dataset:</strong> <input type="text" id="dataset" />
 <input type="button" id="go_to_official_frontend" value="Go to official frontend" c/>
 </div>
-<div id="map"></div>
+<table>
+  <tr><th>Cities/Coutnies</th><th>States/Federal</th></tr>
+  <tr><td id="map"></td><td id="states_federal"></td></tr>
+</table>
   <strong>Url:</strong> <input style="width:80%" type="text" id="url" /> <span id="number_of_rows"></span> rows
   <div id="right_sidebar">
 
