@@ -589,8 +589,12 @@ function run() {
     window.urlElements = urlElements;
 }
 $(function() {
+  
   $('#map_table').width($(window).width()); // css 100% isn't working
   $('#map').height($(window).height()-$('#header').height());
+  if (window.location.hash != '') {
+    $('#map_table').hide();
+  }
   setTimeout(function() {$('#data').doubleScroll();},2000);
   $('#go').click(function(e) {
     getFields($('#api_id').val());
