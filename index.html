@@ -492,7 +492,7 @@ function loadTable(data) {
           var lookForValue = row[base_field];
           $.each(theData, function(j, theDataRow) {
             if (theDataRow[lookForField] == lookForValue) {
-              table_html = theDataRow[col.substring(col.indexOf('__')+2)];
+              table_html += theDataRow[col.substring(col.indexOf('__')+2)];
             } 
           })
         } else if (String(row[col]).indexOf('http') > -1) {
