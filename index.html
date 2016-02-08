@@ -488,7 +488,7 @@ function loadTable(data) {
           console.log(base_field+' || '+col.substring(col.indexOf('__')+2))
           var theToJoin = toJoin[base_field];
           var theData = dataToJoin[theToJoin["dataset"]];
-          var lookForField = theToJoin["serial"]
+          var lookForField = theToJoin["field"]
           var lookForValue = row[base_field];
           $.each(theData, function(j, theDataRow) {
             if (theDataRow[lookForField] == lookForValue) {
