@@ -589,6 +589,7 @@ function run() {
     window.urlElements = urlElements;
 }
 $(function() {
+  $('#map_table').width($(window).width()); // css 100% isn't working
   $('#map').height($(window).height()-$('#header').height());
   setTimeout(function() {$('#data').doubleScroll();},2000);
   $('#go').click(function(e) {
