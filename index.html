@@ -490,8 +490,8 @@ function loadTable(data) {
           console.log(base_field+' || '+col.substring(col.indexOf('__')+2))
           var theToJoin = toJoin[base_field];
           var theData = dataToJoin[theToJoin["dataset"]];
-          var lookForField = theToJoin["field"]
-          if (Object.keys(toJoin[base_field]).indexOf('before')) {
+          var lookForField = theToJoin["field"];
+          if (Object.keys(toJoin[base_field]).indexOf('before') > -1) {
             var lookForValue = row[base_field].substring(0,row[base_field].indexOf(toJoin[base_field]['before']));
           } else {
             console.log('lookForValue '+row[base_field])
