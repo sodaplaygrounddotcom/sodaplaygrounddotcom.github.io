@@ -439,6 +439,9 @@ function loadTable(data) {
         async: false
     }).responseText);
     var toJoin = {"filename": {"dataset": "roster", "before": "@", "field": "serial"}, "userid": {"dataset": "roster", "field": "serial"}}
+  } else {
+    var dataToJoin = {};
+    var toJoin = {};
   }
   fields = [];
   $.each(data, function(i, row) {
