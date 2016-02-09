@@ -447,7 +447,12 @@ function loadTable(data) {
     var dataToJoin = {};
     var toJoin = {};
   }
-  fields = [];
+  var fields = [];
+  var columns = JSON.parse($.ajax({
+        type: "GET",
+        url: "https://"+domain+"/api/views/"+dataset+"/columns.json",
+        async: false
+    }).responseText);
   $.each(data, function(i, row) {
     $.each(Object.keys(row), function(j, key) {
       if (fields.indexOf(key) == -1) {
