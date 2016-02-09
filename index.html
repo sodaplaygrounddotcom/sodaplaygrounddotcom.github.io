@@ -447,7 +447,9 @@ function loadTable(data) {
         fields.push(key);
         if (Object.keys(toJoin).indexOf(key) > -1) {
           $.each(Object.keys(dataToJoin[toJoin[key]["dataset"]][0]), function(i, f) {
-            fields.push(key+'__'+f);
+            if (f != toJoin[key]["field"]) {
+              fields.push(key+'__'+f);
+            }
           })
         }
       }
