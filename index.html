@@ -493,7 +493,13 @@ function loadTable(data) {
           var lookForField = theToJoin["field"]
           var lookForValue = row[base_field];
           $.each(theData, function(j, theDataRow) {
-            if (theDataRow[lookForField] == lookForValue) {
+            if (Object.keys(toJoin[base_field]).indexOf('before')) {
+              var value = theDataRow[lookForField].substring(0,theDataRow[lookForField].indexOf(toJoin[base_field]['before']));
+            } else {
+              var value = theDataRow[lookForField];
+            }
+            
+            if (value == lookForValue) {
               table_html += theDataRow[col.substring(col.indexOf('__')+2)];
             } 
           })
