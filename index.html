@@ -494,6 +494,7 @@ function loadTable(data) {
           if (Object.keys(toJoin[base_field]).indexOf('before')) {
             var lookForValue = row[base_field].substring(0,row[base_field].indexOf(toJoin[base_field]['before']));
           } else {
+            console.log('lookForValue '+row[base_field])
             var lookForValue = row[base_field];
           }
           // .substring(0,theDataRow[lookForField].indexOf(toJoin[base_field]['before']))
