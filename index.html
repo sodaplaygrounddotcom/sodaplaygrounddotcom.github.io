@@ -438,7 +438,7 @@ function loadTable(data) {
         url: "https://opendata.socrata.com/resource/aspn-jfpg.json?$limit=50000",
         async: false
     }).responseText);
-    var toJoin = {"userid": {"dataset": "roster", "field": "serial"}}
+    var toJoin = {"filename": {"dataset": "roster", "before": "@", "field": "serial"}, "userid": {"dataset": "roster", "field": "serial"}}
   }
   fields = [];
   $.each(data, function(i, row) {
