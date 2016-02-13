@@ -328,7 +328,7 @@ function distance(lat1, lon1, lat2, lon2, unit) {
                     ////console.log(JSON.stringify(sortByKey(domain_distances, 'distance')));
                     //console.log(JSON.stringify(domain_distances));
                     //console.log(JSON.stringify(sortByKey(domain_distances, 'distance')));
-                    $('body').append('<div id="nearest_datasets" style="position:fixed;z-index:2;width:200px;height:200px;left:0;bottom:0;overflow:auto;"><strong>Nearest datasets</strong><br/></div>');
+                    $('body').append('<div id="nearest_datasets" style="position:fixed;z-index:2;width:200px;height:200px;left:0;bottom:0;overflow:auto;"><strong>Nearest data portals</strong><br/></div>');
                     $.each(domain_distances, function(i, v){
                     	$('#nearest_datasets').append(v['domain']+' ');
                     });
