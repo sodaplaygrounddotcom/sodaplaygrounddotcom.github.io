@@ -314,8 +314,7 @@ function distance(lat1, lon1, lat2, lon2, unit) {
                       lng: position.coords.longitude
                     };
               
-                    infoWindow.setPosition(pos);
-                    infoWindow.setContent('Location found.');
+                    
                     map.setCenter(pos);
                     domain_distances = []
                     $.each(domains, function(i, v){
