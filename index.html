@@ -319,7 +319,7 @@ function distance(lat1, lon1, lat2, lon2, unit) {
                     map.setCenter(pos);
                     domain_distances = []
                     $.each(domains, function(i, v){
-                      d = distance(v['location']['coordinates'][1], v['location']['coordinates'][0], position.coords.latitude, position.coords.longitude, 'M') {
+                      d = distance(v['location']['coordinates'][1], v['location']['coordinates'][0], position.coords.latitude, position.coords.longitude, 'M');
                       domains.push({'domain': v['domain'], 'distance': distance});
                       console.log(JSON.stringif(sortByKey(domains, 'distance')*-1));
                     });
