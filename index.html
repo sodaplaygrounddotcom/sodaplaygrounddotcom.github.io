@@ -325,9 +325,9 @@ function distance(lat1, lon1, lat2, lon2, unit) {
                       domain_distances.push({'domain': v['domain'], 'distance': d});
                       
                     });
+                    ////console.log(JSON.stringify(sortByKey(domain_distances, 'distance')));
+                    //console.log(JSON.stringify(domain_distances));
                     //console.log(JSON.stringify(sortByKey(domain_distances, 'distance')));
-                    console.log(JSON.stringify(domain_distances));
-                    console.log(JSON.stringify(sortByKey(domain_distances, 'distance')));
                     $('body').append('<div id="nearest_datasets" style="position:fixed;z-index:2;width:200px;height:200px;left:0;bottom:0;overflow:auto;"><strong>Nearest datasets</strong><br/></div>');
                     $.each(domain_distances, function(i, v){
                     	$('#nearest_datasets').append(v['domain']+' ');
@@ -392,7 +392,7 @@ function distance(lat1, lon1, lat2, lon2, unit) {
 <script type='text/javascript'>//<![CDATA[
 function getJsonFromUrl() {
   var url = window.location.hash;
-  console.log(url);
+  //console.log(url);
   if (url.indexOf('?') > -1) {
     query = url.substring(url.indexOf('?')+1);
     var result = {};
@@ -409,7 +409,7 @@ function getJsonFromUrl() {
 function updateQueryGUI() {
   urlJson = getJsonFromUrl();
   if (Object.keys(urlJson).indexOf('$q') > -1) {
-    console.log('is in');
+    //console.log('is in');
     $('#q').val(urlJson['$q']);
   }
   if (Object.keys(urlJson).indexOf('$select') > -1) {
@@ -426,11 +426,11 @@ function updateQueryGUI() {
     });
     
   }
-  console.log(JSON.stringify(urlJson));
+  //console.log(JSON.stringify(urlJson));
 }
 function getItemsForField(field) {
   window.urlElements = getJsonFromUrl();
-  console.log('THE URL ELEMENTS '+window.urlElements)
+  //console.log('THE URL ELEMENTS '+window.urlElements)
   $.get('https://'+domain+'/resource/'+datasetID+'.json?$select='+field+'&$group='+field+'&$limit=500', function(data) {
     var selectedHtml = '';
     if (!(Object.keys(window.urlElements).indexOf(field) > -1)) {
@@ -465,7 +465,7 @@ function getFields() {
       var base_url = window.location.hash.substring(1);
       
     }
-    console.log('base url '+base_url)
+    //console.log('base url '+base_url)
     window.base_url = base_url;
     url = base_url;
     //$('#url').val(url);
@@ -552,14 +552,14 @@ function loadTable(data) {
           //var toJoin = {"userid": {"dataset": "roster", "field": "serial"}}
           var base_field = col.substring(0, col.indexOf('__'));
           
-          console.log(base_field+' || '+col.substring(col.indexOf('__')+2))
+          //console.log(base_field+' || '+col.substring(col.indexOf('__')+2))
           var theToJoin = toJoin[base_field];
           var theData = dataToJoin[theToJoin["dataset"]];
           var lookForField = theToJoin["field"];
           if (Object.keys(toJoin[base_field]).indexOf('before') > -1) {
             var lookForValue = row[base_field].substring(0,row[base_field].indexOf(toJoin[base_field]['before']));
           } else {
-            console.log('lookForValue '+row[base_field])
+            //console.log('lookForValue '+row[base_field])
             var lookForValue = row[base_field];
           }
           // .substring(0,theDataRow[lookForField].indexOf(toJoin[base_field]['before']))
@@ -630,7 +630,7 @@ function getData() {
     }
     urlToGet += '$limit=2000'
   }
-  console.log('going to url '+urlToGet);
+  //console.log('going to url '+urlToGet);
   window.domain = window.location.hash.substring(9,window.location.hash.substring(9).indexOf('/')+9);
   window.datasetID = window.location.hash.substring(window.location.hash.indexOf('/resource/')+10, window.location.hash.indexOf('.json'));
   document.title = $('#dataset').val() + ' | ' + $('#domains').val();
@@ -641,7 +641,7 @@ function getData() {
     });
     $.get(urlToGet, function(data) {
         loadTable(data);
-    }).fail(function(data) {console.log('yes');
+    }).fail(function(data) {//console.log('yes');
         $('#data').text(JSON.stringify(data));
     });
   }
@@ -702,7 +702,7 @@ $(function() {
   
   $('#map_table').width($(window).width()); // css 100% isn't working
   $('#map').height($(window).height()-$('#header').outerHeight());
-  console.log('for hiding map '+window.location.hash)
+  //console.log('for hiding map '+window.location.hash)
   hideMapTable();
   setTimeout(function() {$('#data').doubleScroll();},2000);
   $('#go').click(function(e) {
@@ -747,11 +747,11 @@ $(function() {
   updateQueryGUI();
   domain = window.location.hash.substring(9,window.location.hash.substring(9).indexOf('/')+9);
   $('#domains').val(domain);
-  console.log('domain parse '+domain+(window.location.hash.substring(9).indexOf('/')+9)+window.location.hash.substring(9))
+  //console.log('domain parse '+domain+(window.location.hash.substring(9).indexOf('/')+9)+window.location.hash.substring(9))
   
   datasetID = window.location.hash.substring(window.location.hash.indexOf('/resource/')+10,window.location.hash.indexOf('.json'));
   window.datasetID = datasetID;
-  console.log('dataset ID '+datasetID);
+  //console.log('dataset ID '+datasetID);
   setTimeout(function() {getData();}, 1000);
   $('body').on('click', '.filter_url', function(e) {
     setTimeout(function(){getData();},500);
@@ -790,13 +790,13 @@ $(function() {
     });
   });
   $('body').on('input propertychange paste autocompleteselect autocompletechange change autocompleteselect', '#dataset', function(e) {
-    console.log($(this).val());
+    //console.log($(this).val());
     if ($(this).val().indexOf(' | ') > -1) {
-      console.log('yes');
+      //console.log('yes');
       var datasetID = $(this).val().substring(0, $(this).val().indexOf(' | '));
-      console.log(datasetID+'*');
+      //console.log(datasetID+'*');
       var domain = window.datasetIDToDomain[datasetID];
-      console.log(domain);
+      //console.log(domain);
       $('#domains').val(domain);
       var newUrl = 'https://'+domain+'/resource/'+datasetID+'.json';
       $('#url').val(newUrl);
