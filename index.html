@@ -50,6 +50,9 @@ td, th {
   vertical-align:top;
   text-align:left;
 }
+#dataset_viewer {
+	display:none;
+}
 table {
   border-collapse:collapse;
 }
@@ -355,6 +358,7 @@ function distance(lat1, lon1, lat2, lon2, unit) {
 <input type="button" id="go_to_official_frontend" value="Go to official frontend" c/>
 </div>
 <div id="map"></div>
+<div id="dataset_viewer">
   <strong>Url:</strong> <input style="width:80%" type="text" id="url" /> <span id="number_of_rows"></span> rows
   <div id="right_sidebar">
 
@@ -383,6 +387,7 @@ function distance(lat1, lon1, lat2, lon2, unit) {
 </div>
 <div id="data">
 
+</div>
 </div>
 <script type='text/javascript'>//<![CDATA[
 function getJsonFromUrl() {
@@ -690,6 +695,7 @@ function run() {
 function hideMapTable() {
   if (window.location.hash != '') {
     $('#map_table').hide();
+    $('#dataset_viewer').show();
   }
 }
 $(function() {
