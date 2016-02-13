@@ -275,12 +275,17 @@ a.filter_url:link, a.filter_url:visited {
 
                 // Create the Google Map using our element and options defined above
                 var map = new google.maps.Map(mapElement, mapOptions);
-
-                // Let's also add a marker while we're at it
-                var marker = new google.maps.Marker({
-                    position: new google.maps.LatLng(40.6700, -73.9400),
+                var domains = JSON.parse($.ajax({
+                    type: "GET",
+                    url: "https://odn.data.socrata.com/resource/jwbj-xtgt.json?$where=location%20IS%20NOT%20NULL&$limit=1000",
+                    async: false
+                }).responseText);
+                $.each(domains, function(i, v) {
+                  var marker = new google.maps.Marker({
+                    position: new google.maps.LatLng(v['location']['coordinates'][1], v['location']['coordinates'][0]),
                     map: map,
-                    title: 'Snazzy!'
+                    title: v['domain']
+                  });
                 });
             }
         </script>
