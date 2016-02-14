@@ -208,7 +208,8 @@ function distance(lat1, lon1, lat2, lon2, unit) {
                     position: new google.maps.LatLng(v['location']['coordinates'][1], v['location']['coordinates'][0]),
                     map: map,
                     title: v['domain'],
-                    icon: 'https://'+v['domain']+'/favicon.ico'
+                    //icon: 'https://'+v['domain']+'/favicon.ico'
+                    icon: 'http://data.oregon.gov/stylesheets/images/domains/data.oregon.gov/oregon_square_logo.png'
                   });
                 });
                 window.domains = domains;
