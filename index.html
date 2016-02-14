@@ -543,7 +543,7 @@ function loadTable(data) {
   })
   table_html += '</table>';
   $('#data').html(table_html);
-  $('#data').trigger("focus");
+  $('#data').trigger("click");
   setTimeout(function() {$('#data').doubleScroll();},2000);
   //$('#data').text(JSON.stringify(data));
 }
