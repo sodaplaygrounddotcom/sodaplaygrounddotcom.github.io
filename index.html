@@ -233,9 +233,9 @@ function distance(lat1, lon1, lat2, lon2, unit) {
                     ////console.log(JSON.stringify(sortByKey(domain_distances, 'distance')));
                     //console.log(JSON.stringify(domain_distances));
                     //console.log(JSON.stringify(sortByKey(domain_distances, 'distance')));
-                    $('body').append('<div id="nearest_datasets" style="position:fixed;z-index:2;width:200px;height:200px;left:0;bottom:0;overflow:auto;"><strong>Nearest data portals</strong><br/></div>');
+                    //$('body').append('<div id="nearest_datasets" style="position:fixed;z-index:2;width:200px;height:200px;left:0;bottom:0;overflow:auto;"><strong>Nearest data portals</strong><br/></div>');
                     $.each(domain_distances, function(i, v){
-                    	$('#nearest_datasets').append(v['domain']+' ');
+                    	$('#nearest_data_portals').append('<li><a href="#">'+v['domain']+'</a></li>');
                     });
                   }, function() {
                     
@@ -274,15 +274,9 @@ function distance(lat1, lon1, lat2, lon2, unit) {
         <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
         <li><a href="#">Link</a></li>
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
-          <ul class="dropdown-menu" role="menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
-            <li class="divider"></li>
-            <li><a href="#">Separated link</a></li>
-            <li class="divider"></li>
-            <li><a href="#">One more separated link</a></li>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Nearest data portals <span class="caret"></span></a>
+          <ul id="nearest_data_portals" class="dropdown-menu" role="menu">
+            
           </ul>
         </li>
       </ul>
