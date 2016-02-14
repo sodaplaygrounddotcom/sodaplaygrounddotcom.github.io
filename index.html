@@ -207,7 +207,8 @@ function distance(lat1, lon1, lat2, lon2, unit) {
                   var marker = new google.maps.Marker({
                     position: new google.maps.LatLng(v['location']['coordinates'][1], v['location']['coordinates'][0]),
                     map: map,
-                    title: v['domain']
+                    title: v['domain'],
+                    icon: 'https://'+v['domain']+'/favicon.ico'
                   });
                 });
                 window.domains = domains;
