@@ -73,8 +73,6 @@ color:#FFF;
 padding:10px;
 }
 #data {
-margin-right:200px;
-border-right:1px solid #000;
 overflow:auto;
 }
 .ui-autocomplete {
@@ -305,9 +303,9 @@ function distance(lat1, lon1, lat2, lon2, unit) {
 </nav>
 <div id="map"></div>
 <div id="dataset_viewer">
-  <strong>Url:</strong> <input style="width:80%" type="text" id="url" /> <span id="number_of_rows"></span> rows
-  <div id="right_sidebar">
-
+  <div id="right_sidebar" style="display:none">
+<strong>Url:</strong> <input style="width:80%" type="text" id="url" /> <span id="number_of_rows"></span> rows
+  
 <ul>
 <li><input type="button" value="Go to view without any parameters" id="go_to_main_view" /></li>
 <li><strong>Query:</strong> <input id="q" /><input type="button" id="q_go" value="Go" /><input type="button" value="Clear" id="q_clear" /></li>
