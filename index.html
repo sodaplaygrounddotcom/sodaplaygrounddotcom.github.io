@@ -286,6 +286,7 @@ function distance(lat1, lon1, lat2, lon2, unit) {
         </li>
       </ul>
       <form class="navbar-form navbar-left" role="search">
+      	
         <strong>Domain:</strong> <input type="text" id="domains" /> 
 <strong>Dataset:</strong> <input type="text" id="dataset" />
 <input type="button" id="go_to_official_frontend" value="Go to official frontend" />
@@ -459,7 +460,7 @@ function loadTable(data) {
       }
     });
   });
-  table_html = '<table>';
+  table_html = '<table  class="table">';
   table_html += '<tr>';
   $.each(fields, function(i, v) {
     if (v == 'address') {
