@@ -26,6 +26,9 @@
   <script src="https://cdn.rawgit.com/avianey/jqDoubleScroll/master/jquery.doubleScroll.js"></script>
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.6/cerulean/bootstrap.min.css" />
   <style type="text/css">
+  body {
+  	padding-top:51px;
+  }
   .dropdown:hover .dropdown-menu {
 display: block;
 }
@@ -635,7 +638,6 @@ function hideMapTable() {
   }
 }
 $(function() {
-  $('body').css('margin-top', $(window).height()-$('nav').outerHeight());
   $('#map_table').width($(window).width()); // css 100% isn't working
   $('#map').height($(window).height()-$('nav').outerHeight());
   //console.log('for hiding map '+window.location.hash)
