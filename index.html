@@ -248,11 +248,46 @@ function distance(lat1, lon1, lat2, lon2, unit) {
   };
 </script>
 <script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
-<div id="header"><a href="http://sodaplus.org">SODA Plus</a>: An open source alterative to Socrata's frontend. Contribute via <a href="https://github.com/sodaplus/sodaplus.github.io">Github repo</a>
-<br/><strong>Domain:</strong> <input type="text" id="domains" /> 
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">SODA Playground</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
+        <li><a href="#">Link</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="#">Action</a></li>
+            <li><a href="#">Another action</a></li>
+            <li><a href="#">Something else here</a></li>
+            <li class="divider"></li>
+            <li><a href="#">Separated link</a></li>
+            <li class="divider"></li>
+            <li><a href="#">One more separated link</a></li>
+          </ul>
+        </li>
+      </ul>
+      <form class="navbar-form navbar-left" role="search">
+        <strong>Domain:</strong> <input type="text" id="domains" /> 
 <strong>Dataset:</strong> <input type="text" id="dataset" />
-<input type="button" id="go_to_official_frontend" value="Go to official frontend" c/>
-</div>
+<input type="button" id="go_to_official_frontend" value="Go to official frontend" />
+      </form>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#">Link</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
 <div id="map"></div>
 <div id="dataset_viewer">
   <strong>Url:</strong> <input style="width:80%" type="text" id="url" /> <span id="number_of_rows"></span> rows
