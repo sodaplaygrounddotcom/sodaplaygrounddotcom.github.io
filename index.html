@@ -649,7 +649,7 @@ function hideMapTable() {
 $(function() {
   $('#map_table').width($(window).width()); // css 100% isn't working
   $('#map').height($(window).height()-$('nav').outerHeight());
-  $('#data').height($(window).height()-$('nav').outerHeight());
+  $('#data').height($(window).height()-$('nav').outerHeight()-20);
   //console.log('for hiding map '+window.location.hash)
   hideMapTable();
   setTimeout(function() {$('#data').doubleScroll();},2000);
