@@ -271,6 +271,9 @@ function distance(lat1, lon1, lat2, lon2, unit) {
                     //icon: 'https://data.seattle.gov/stylesheets/images/domains/data.seattle.gov/favicon.ico'
                     icon: image
                   });
+                  marker.addListen('click', function() {
+                    $("#data_portal_modal").modal();
+                  });
                 });
                 window.domains = domains;
                 if (navigator.geolocation) {
@@ -364,6 +367,25 @@ function distance(lat1, lon1, lat2, lon2, unit) {
 </div>
 </div>
 <div id="map"></div>
+<div class="modal fade" id="data_portal_modal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Modal Header</h4>
+        </div>
+        <div class="modal-body">
+          <p>Some text in the modal.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
 <footer class="footer">SODA Playground is an <a href="https://github.com/sodaplus/sodaplus.github.io">open source software project</a> to explore ways to make it easier to publish and use data with the <a href="https://dev.socrata.com/">Socrata Open Data API</a>.</p>
     
     </footer>
