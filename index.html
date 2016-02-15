@@ -530,7 +530,7 @@ function loadTable(data) {
       } else if (String(row[col]) == '[object Object]') {
         table_html += JSON.stringify(row[col]);
       } else if (col == 'count') {
-      	table_html += '<td>'+numberWithCommas(row[col])+'</td>';
+      	table_html += numberWithCommas(row[col]);
       } else if (String(row[col]).length < 50) {
         table_html += '<a href="'+hashUrlForFiltering+'" class="filter_url">'+row[col]+'</a>';
       } else {
