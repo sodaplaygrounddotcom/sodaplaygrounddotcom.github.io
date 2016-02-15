@@ -254,13 +254,22 @@ function distance(lat1, lon1, lat2, lon2, unit) {
                     async: false
                 }).responseText);
                 $.each(domains, function(i, v) {
+                  var image = {
+		    url: domains_to_icons[v['domain']],
+		    // This marker is 20 pixels wide by 32 pixels high.
+		    size: new google.maps.Size(20, 32),
+		    // The origin for this image is (0, 0).
+		    origin: new google.maps.Point(0, 0),
+		    // The anchor for this image is the base of the flagpole at (0, 32).
+		    anchor: new google.maps.Point(0, 32)
+		  };
                   var marker = new google.maps.Marker({
                     position: new google.maps.LatLng(v['location']['coordinates'][1], v['location']['coordinates'][0]),
                     map: map,
                     title: v['domain'],
                     //icon: 'https://'+v['domain']+'/stylesheets/images/domains/'+v['domain']+'/favicon.ico'
                     //icon: 'https://data.seattle.gov/stylesheets/images/domains/data.seattle.gov/favicon.ico'
-                    icon: domains_to_icons[v['domain']]
+                    icon: image
                   });
                 });
                 window.domains = domains;
