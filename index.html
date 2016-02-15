@@ -260,6 +260,8 @@ function distance(lat1, lon1, lat2, lon2, unit) {
                   });
                   marker.addListener('click', function() {
                     $("#dataPortalModal h4").text(this.title);
+                    $("#dataPortalModal p").text('abc');
+                    
                     $("#dataPortalModal").modal();
                   });
                 });
