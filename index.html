@@ -434,6 +434,9 @@ function getFields() {
     $('#group_fields').html(group_fields_html);
   });
 }
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
 function loadTable(data) {
   //fields = Object.keys(data[0]); // sometimes fields are missing in first row
   if (window.location.hash.indexOf('9qnw-vqnm') > -1) {
@@ -526,6 +529,8 @@ function loadTable(data) {
       
       } else if (String(row[col]) == '[object Object]') {
         table_html += JSON.stringify(row[col]);
+      } else if (col == 'count') {
+      	table_html += '<td>'+numberWithCommas(row[col])+'</td>';
       } else if (String(row[col]).length < 50) {
         table_html += '<a href="'+hashUrlForFiltering+'" class="filter_url">'+row[col]+'</a>';
       } else {
