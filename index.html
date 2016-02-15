@@ -271,7 +271,7 @@ function distance(lat1, lon1, lat2, lon2, unit) {
                     //icon: 'https://data.seattle.gov/stylesheets/images/domains/data.seattle.gov/favicon.ico'
                     icon: image
                   });
-                  marker.addListen('click', function() {
+                  marker.addListener('click', function() {
                     $("#data_portal_modal").modal();
                   });
                 });
