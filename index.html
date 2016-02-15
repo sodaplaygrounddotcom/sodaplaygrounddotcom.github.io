@@ -268,7 +268,7 @@ function distance(lat1, lon1, lat2, lon2, unit) {
                     icon: image
                   });
                   marker.addListener('click', function() {
-                    $("#dataPortalModal h4").html('<img src="'+this.icon.url+'" /> '+this.title);
+                    $("#dataPortalModal h4").html('<img src="'+this.icon.url+'" style="width:20px;height:20px;" /> '+this.title);
                     $("#dataPortalModal p").text('abc');
                     
                     $("#dataPortalModal").modal();
