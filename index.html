@@ -160,8 +160,12 @@ a.filter_url:link, a.filter_url:visited {
 	padding:15px;
 }
 .jumbotron h1 {
+	display:inline;
 	font-size:40px;
 	margin:0;
+}
+.jumbotron .btn-group {
+	display:inline;
 }
   </style>
 
@@ -309,15 +313,15 @@ function distance(lat1, lon1, lat2, lon2, unit) {
   </div>
 </nav>
 <div class="jumbotron">
-	<div class="btn-group pull-right">
+	
+  <h1>Map of open data portals powered by Socrata</h1>
+  <div class="btn-group">
   <a href="#" class="btn btn-default">Nearest data portals</a>
   <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></a>
   <ul id="nearest_data_portals" class="dropdown-menu scrollable-menu">
     
   </ul>
 </div>
-  <h1>Map of open data portals powered by Socrata</h1>
-  
 </div>
 <div id="map"></div>
 <div id="dataset_viewer">
