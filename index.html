@@ -348,6 +348,16 @@ function distance(lat1, lon1, lat2, lon2, unit) {
 </div>
 <!--<input type="button" id="go_to_official_frontend" value="Go to official frontend" />-->
       </form>
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+      <ul class="nav navbar-nav">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dataset tools <span class="caret"></span></a>
+          <ul class="dropdown-menu scrollable-menu" role="menu">
+            <li><a href="#" id="openQueryBuilder">Query builder</a></li>
+          </ul>
+        </li>
+        
+      </ul>
       <ul class="nav navbar-nav navbar-right">
         <li><a href="https://github.com/sodaplus/sodaplus.github.io"><i class="fa fa-github"></i></a></li>
       </ul>
@@ -366,6 +376,51 @@ function distance(lat1, lon1, lat2, lon2, unit) {
 </div>
 </div>
 <div id="map"></div>
+<!-- $select	The set of columns to be returned	All columns, equivalent to $select=*	SELECT
+$where	Filters the rows to be returned	No filter	WHERE
+$order	Specifies the order of results	Unspecified order	ORDER BY
+$group	Column to group results on, similar to SQL Grouping	No grouping	GROUP BY
+$limit	Maximum number of results to return	1000 (legacy: maximum of 50,000; new endpoints: unlimited »)	LIMIT
+$offset	Offset count into the results to start at, used for paging	0	OFFSET
+$q	Performs a full text search for a value.	No search -->
+
+<div class="modal fade" id="dataPortalModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <div class="form-group">
+    <label>Soql url</label>
+    <input type="text" class="form-control" id="soqlUrl" />
+  </div>
+  <div class="form-group">
+    <label>$q (search every field for values in their root form. For exact matching you need to use the like function in a $where)</label>
+    <input type="text" class="form-control" id="soqlUrl" />
+    <p>parameter is used to access a special full-text index that searches within the dataset.
+    The full-text index spans all of the fields of the dataset, so think of it more like using
+    a search engine than performing a SQL query.</p>
+<p>Multiple search terms are ANDed together, rather than used as a phrase search,
+and words are stemmed before indexing and before each query. Stemming reduces
+each word down to its base or root form, so plural nouns like “criminals” will
+be reduced down to the singular “criminal”, and verbs like “stealing” will
+reduced down to their root of “steal”. So, searching with $q=stealing bicycles
+would match on the phrase “he was looking for a bicycle to steal” as well as
+the words “steals” and “bicycles” in different columns of a given record.</p>
+  </div>
+        </div>
+        <div class="modal-body">
+          <p>Some text in the modal.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
 <div class="modal fade" id="dataPortalModal" role="dialog">
     <div class="modal-dialog">
     
