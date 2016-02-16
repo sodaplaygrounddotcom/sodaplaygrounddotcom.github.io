@@ -17,6 +17,10 @@
   body {
   	padding-top:51px;
   }
+  .gitter-open-chat-button {
+    top:51px;
+    height:41px;
+  }
   .dropdown-menu>li
 {	position:relative;
 	-webkit-user-select: none; /* Chrome/Safari */        
@@ -65,9 +69,6 @@
 }
   .footer {
   	display:block !important;
-  position: absolute;
-  bottom: 0;
-  left:0;
   width: 100%;
   /* Set the fixed height of the footer here */
   height: 41px  !important;
@@ -216,7 +217,7 @@ a.filter_url:link, a.filter_url:visited {
 	position:absolute;
 	background-image:linear-gradient(#54b4eb, #2fa4e7 60%, #1d9ce5);
 	opacity: 0.92;
-	top:51px;
+	top:92px;
 	left:0;
 	width:100%;
 	margin:0;
@@ -430,6 +431,9 @@ function distance(lat1, lon1, lat2, lon2, unit) {
     </div>
   </div>
 </nav>
+<footer class="footer">SODA Playground is an independent <a href="https://github.com/sodaplus/sodaplus.github.io">open source software project</a> to play around with ideas for making it easier to publish and use data with SODA, the <a href="https://dev.socrata.com/">Socrata Open Data API</a>.</p>
+    
+    </footer>
 <div class="jumbotron">
 	
   <h1>Map of open data portals powered by <a href="http://socrata.com">Socrata</a></h1>
@@ -507,9 +511,7 @@ the words “steals” and “bicycles” in different columns of a given record
       
     </div>
   </div>
-<footer class="footer">SODA Playground is an <a href="https://github.com/sodaplus/sodaplus.github.io">open source software project</a> to explore ways to make it easier to publish and use data with the <a href="https://dev.socrata.com/">Socrata Open Data API</a>.</p>
-    
-    </footer>
+
 <div id="dataset_viewer">
   <div id="right_sidebar" style="display:none">
 <strong>Url:</strong> <input style="width:80%" type="text" id="url" /> <span id="number_of_rows"></span> rows
