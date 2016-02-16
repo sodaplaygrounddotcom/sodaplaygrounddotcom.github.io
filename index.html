@@ -390,7 +390,11 @@ $q	Performs a full text search for a value.	No search -->
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        	<h4>Query Builder</h4>
+        
+        </div>
+        <div class="modal-body">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
           <div class="form-group">
     <label>Soql url</label>
     <input type="text" class="form-control" id="soqlUrl" />
@@ -409,9 +413,6 @@ reduced down to their root of “steal”. So, searching with $q=stealing bicycl
 would match on the phrase “he was looking for a bicycle to steal” as well as
 the words “steals” and “bicycles” in different columns of a given record.</p>
   </div>
-        </div>
-        <div class="modal-body">
-          <p>Some text in the modal.</p>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
