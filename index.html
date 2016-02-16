@@ -924,7 +924,7 @@ $(function() {
   });
   $(document).keypress("q",function(e) {
 	  if(e.ctrlKey) {
-	    $('#queryBuilderModal').modal();
+	    $('#queryBuilderModal').modal('toggle');
       e.preventDefault();
 	  }
 	});
