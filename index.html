@@ -213,6 +213,10 @@ a.filter_url:link, a.filter_url:visited {
   color:#000;
   text-decoration:none;
 }
+.chat-app {
+  z-index:5;
+  top:51px;
+}
 .jumbotron {
 	position:absolute;
 	background-image:linear-gradient(#54b4eb, #2fa4e7 60%, #1d9ce5);
@@ -353,7 +357,8 @@ function distance(lat1, lon1, lat2, lon2, unit) {
 <body>
   <script>
   ((window.gitter = {}).chat = {}).options = {
-    room: 'sodaplus/sodaplus.github.io'
+    room: 'sodaplus/sodaplus.github.io',
+    activationElement: false
   };
 </script>
 <script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
@@ -431,8 +436,16 @@ function distance(lat1, lon1, lat2, lon2, unit) {
     </div>
   </div>
 </nav>
-<footer class="footer">SODA Playground is an independent <a href="https://github.com/sodaplus/sodaplus.github.io">open source software project</a> to play around with ideas for making it easier to publish and use data with SODA, the <a href="https://dev.socrata.com/">Socrata Open Data API</a>.</p>
-    
+<button class="js-gitter-toggle-chat-button btn btn-primary" style="position:absolute;top:55px;right:10px;" data-gitter-toggle-chat-state="true">
+  <span class="small">Chat about project with Github account</span></button>
+
+<footer class="footer small">
+  
+  SODA Playground is an independent 
+<a href="https://github.com/sodaplus/sodaplus.github.io">open source software proj;ect</a> 
+to play around with ideas for making it easier to publish and use data with SODA, the 
+<a href="https://dev.socrata.com/">Socrata Open Data API</a>. </p>
+
     </footer>
 <div class="jumbotron">
 	
