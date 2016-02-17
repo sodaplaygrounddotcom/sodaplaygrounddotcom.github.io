@@ -436,7 +436,7 @@ function distance(lat1, lon1, lat2, lon2, unit) {
     </div>
   </div>
 </nav>
-<button class="js-gitter-toggle-chat-button btn btn-primary" style="position:absolute;top:55px;right:10px;" data-gitter-toggle-chat-state="true">
+<button class="js-gitter-toggle-chat-button btn btn-primary" style="position:absolute;top:55px;right:10px;height:30px" data-gitter-toggle-chat-state="true">
   <span class="small">Chat about project with Github account</span></button>
 
 <footer class="footer small">
@@ -1036,6 +1036,7 @@ $(function() {
 		root.find('.left-caret').toggleClass('right-caret left-caret');
 		root.find('.sub-menu:visible').hide();
 	});
+	setTimeout($("#footer").hide(), 15000);
 })
 //]]> 
 
