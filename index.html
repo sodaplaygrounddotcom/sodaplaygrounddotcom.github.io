@@ -664,7 +664,7 @@ function numberWithCommas(x) {
 }
 function loadTable(data) {
   //fields = Object.keys(data[0]); // sometimes fields are missing in first row
-  if (window.location.hash.indexOf('9qnw-vqnm') > -1) {
+  if (window.location.hash.indexOf('9qnw-vqnm') > -1 || window.location.hash.indexOf('tpvk-5fr3') > -1) {
     var dataToJoin = {}
     dataToJoin["roster"] = JSON.parse($.ajax({
         type: "GET",
