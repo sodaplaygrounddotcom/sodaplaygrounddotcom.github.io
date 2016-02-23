@@ -956,11 +956,15 @@ $(function() {
   });
   var datasets = [];
   
-  $.get('http://funwithsoda.github.io/catalog.json', function(data) {
+  $.get('https://opendata.socrata.com/resource/v7cx-idrg.json?$select=nbe_id,domain,name&$limit=20000', function(data) {
     //data = JSON.parse(data);
-    window.datasetIDToDomain = data['datasets_to_domain'];
+    window.datasetIDToDomain = {};
     
-    window.allDatasets = data['datasets'];
+    window.allDatasets = [];
+    $.each(data, function(i, v){
+      window.allDatasets.push(v['nbe_id']+' | '+v['name']);
+      window.datasetIDToDomain[v['nbe_id']] = v['domain'];
+    })
     if (window.location.hash.indexOf('.json') > -1) {
       window.datasetID = window.location.hash.substring(window.location.hash.indexOf('/resource/')+10, window.location.hash.indexOf('.json'));
       $.each(window.allDatasets, function(i, v) {
