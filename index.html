@@ -450,7 +450,7 @@ function distance(lat1, lon1, lat2, lon2, unit) {
 <footer class="footer small">
   
   SODA Playground is an independent 
-<a href="https://github.com/sodaplus/sodaplus.github.io">open source software proj;ect</a> 
+<a href="https://github.com/sodaplus/sodaplus.github.io">open source software project</a> 
 to play around with ideas for making it easier to publish and use data with SODA, the 
 <a href="https://dev.socrata.com/">Socrata Open Data API</a>. 
 
@@ -1044,7 +1044,7 @@ $(function() {
 		root.find('.left-caret').toggleClass('right-caret left-caret');
 		root.find('.sub-menu:visible').hide();
 	});
-	setTimeout(function() {$(".footer").hide()}, 15000);
+	setTimeout(function() {console.log('hiding footer');$(".footer").hide()}, 15000);
 })
 //]]> 
 
