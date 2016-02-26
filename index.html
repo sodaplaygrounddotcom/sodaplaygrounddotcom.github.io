@@ -607,6 +607,7 @@ the words “steals” and “bicycles” in different columns of a given record
 </div>
 </div>
 <script type='text/javascript'>//<![CDATA[
+window.domainsShown = [];
 function dataPortalModal(domain, icon) {
 	$("#dataPortalModal h4").html('<img src="'+icon+'" style="width:20px;height:20px;" /> '+domain);
 	$("#dataPortalModal p").text('abc');
@@ -1029,10 +1030,22 @@ $(function() {
       }
     })
     .autocomplete( "instance" )._renderItem = function( ul, item ) {
-      setMapOnAll(null);
+      //setMapOnAll(null);
+      var datasetID = item.label.substring(0, $(this).val().indexOf(' | '));
+      //console.log(datasetID+'*');
+      var domain = window.datasetIDToDomain[datasetID];
+      window.domainsShown.push(domain);
+      for (var i = 0; i < window.markers.length; i++) {
+      	if (window.domainsShown.indexOf(window.markers[i]) == -1) {
+          window.markers[i].setMap(null);
+      	} else {
+      	  var map = new google.maps.Map(document.getElementById("map"));
+      	  window.markers[i].setMap(map);	
+      	}
+      }
       console.log('instance rendering is happening');
       return $( "<li>" )
-        .append( "<a>" + item.label + "<br>" + item.desc + "</a>" )
+        .append( item.label )
         .appendTo( ul );
     };
   });
