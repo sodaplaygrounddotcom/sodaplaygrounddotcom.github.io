@@ -1031,7 +1031,9 @@ $(function() {
     .autocomplete( "instance" )._renderItem = function( ul, item ) {
       setMapOnAll(map);
       console.log('instance rendering is happening');
-      return '';
+      return $( "<li>" )
+        .append( "<a>" + item.label + "<br>" + item.desc + "</a>" )
+        .appendTo( ul );
     };
   });
   $('body').on('input propertychange paste autocompleteselect autocompletechange change autocompleteselect', '#dataset', function(e) {
