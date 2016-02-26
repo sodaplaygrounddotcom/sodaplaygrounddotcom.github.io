@@ -1035,6 +1035,7 @@ $(function() {
       //console.log(datasetID+'*');
       var domain = window.datasetIDToDomain[datasetID];
       window.domainsShown.push(domain);
+      console.log(JSON.stringify(window.domainsShown)+' '+window.markers[i].title);
       for (var i = 0; i < window.markers.length; i++) {
       	if (window.domainsShown.indexOf(window.markers[i].title) == -1) {
           window.markers[i].setMap(null);
