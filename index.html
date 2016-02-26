@@ -1029,7 +1029,7 @@ $(function() {
       }
     })
     .autocomplete( "instance" )._renderItem = function( ul, item ) {
-      setMapOnAll(map);
+      setMapOnAll(null);
       console.log('instance rendering is happening');
       return $( "<li>" )
         .append( "<a>" + item.label + "<br>" + item.desc + "</a>" )
