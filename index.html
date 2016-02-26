@@ -312,6 +312,7 @@ function distance(lat1, lon1, lat2, lon2, unit) {
 		    // The anchor for this image is the base of the flagpole at (0, 32).
 		    anchor: new google.maps.Point(0, 32)
 		  };
+		  window.markers = [];
                   var marker = new google.maps.Marker({
                     position: new google.maps.LatLng(v['location']['coordinates'][1], v['location']['coordinates'][0]),
                     map: map,
@@ -320,6 +321,7 @@ function distance(lat1, lon1, lat2, lon2, unit) {
                     //icon: 'https://data.seattle.gov/stylesheets/images/domains/data.seattle.gov/favicon.ico'
                     icon: image
                   });
+                  markers.push(marker);
                   marker.addListener('click', function() {
                     dataPortalModal(this.title, this.icon.url);
                   });
@@ -920,8 +922,8 @@ function run() {
     window.urlElements = urlElements;
 }
 function setMapOnAll(map) {
-  for (var i = 0; i < markers.length; i++) {
-    markers[i].setMap(map);
+  for (var i = 0; i < window.markers.length; i++) {
+    window.markers[i].setMap(map);
   }
 }
 
@@ -998,11 +1000,7 @@ $(function() {
     });
     $( "#domains" ).autocomplete({
       source: domains
-    })
-    .autocomplete( "instance" )._renderItem = function( ul, item ) {
-      setMapOnAll(map);
-      return '';
-    };
+    });
   });
   var datasets = [];
   
@@ -1029,7 +1027,12 @@ $(function() {
         setTimeout(function(){$('#dataset').trigger('change');},1000);
         
       }
-    });
+    })
+    .autocomplete( "instance" )._renderItem = function( ul, item ) {
+      setMapOnAll(map);
+      console.log('instance rendering is happening');
+      return '';
+    };
   });
   $('body').on('input propertychange paste autocompleteselect autocompletechange change autocompleteselect', '#dataset', function(e) {
     //console.log($(this).val());
