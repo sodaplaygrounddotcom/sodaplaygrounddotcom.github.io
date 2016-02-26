@@ -1031,7 +1031,7 @@ $(function() {
     })
     .autocomplete( "instance" )._renderItem = function( ul, item ) {
       //setMapOnAll(null);
-      var datasetID = item.label.substring(0, item.label.val().indexOf(' | '));
+      var datasetID = item.label.substring(0, item.label.indexOf(' | '));
       //console.log(datasetID+'*');
       var domain = window.datasetIDToDomain[datasetID];
       window.domainsShown.push(domain);
