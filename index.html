@@ -919,6 +919,12 @@ function run() {
     $('#url').trigger('input');
     window.urlElements = urlElements;
 }
+function setMapOnAll(map) {
+  for (var i = 0; i < markers.length; i++) {
+    markers[i].setMap(map);
+  }
+}
+
 function hideMapTable() {
   if (window.location.hash != '') {
     $('#map').hide();
@@ -992,7 +998,11 @@ $(function() {
     });
     $( "#domains" ).autocomplete({
       source: domains
-    });
+    })
+    .autocomplete( "instance" )._renderItem = function( ul, item ) {
+      setMapOnAll(map);
+      return '';
+    };
   });
   var datasets = [];
   
