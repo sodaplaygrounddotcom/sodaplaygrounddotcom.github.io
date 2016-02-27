@@ -755,7 +755,11 @@ function loadTable(data) {
     if (v == 'address') {
         table_html += '<th>Streetview</th>';
       }
-    table_html += '<th>'+v+'</th>';
+      dropdown_html = '<a href="#" data-toggle="dropdown" class="dropdown-toggle">'+v+' <b class="caret"></b></a>';
+      dropdown_html += '<ul class="dropdown-menu">';
+      dropdown_html += '<li><a href="#">Inbox</a></li>';
+      dropdown_html += '</ul>';
+    table_html += '<th class="dropdown">'+dropdown_html+'</th>';
   })
   table_html += '</tr>';
   $.each(data, function(i, row) {
