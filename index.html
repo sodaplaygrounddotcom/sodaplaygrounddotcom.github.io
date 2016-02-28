@@ -737,7 +737,7 @@ function loadTable(data) {
   var fields = [];
   var columns = JSON.parse($.ajax({
         type: "GET",
-        url: "https://"+domain+"/api/views/"+dataset+"/columns.json",
+        url: "https://"+domain+"/api/views/"+datasetID+"/columns.json",
         async: false
     }).responseText);
   $.each(data, function(i, row) {
