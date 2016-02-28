@@ -757,7 +757,7 @@ function loadTable(data) {
       }
       dropdown_html = '<a href="#" data-toggle="dropdown" class="dropdown-toggle" style="white-space: nowrap !important;">'+v+' <b class="caret"></b></a>';
       dropdown_html += '<ul class="dropdown-menu" style="margin-top:-3px;">';
-      dropdown_html += '<li class="small"  style="white-space: nowrap !important;"><label>Containing phrase:</label> <input type="text" style="display:inline" data-type="containing_phrase" data-field="'+v+'" class="small where_parameter_input form-control" /><input  style="display:inline" type="button" value="Go" class="small where_parameter_input form-control" /></li>';
+      dropdown_html += '<li class="small"  style="white-space: nowrap !important;"><label>Containing phrase:</label> <input type="text" style="display:inline" data-type="containing_phrase" data-field="'+v+'" class="small where_parameter_input form-control" /><input  style="display:inline" type="button" value="Go" class="small where_parameter_input_button form-control" /></li>';
       dropdown_html += '</ul>';
     table_html += '<th class="dropdown"  style="white-space: nowrap !important;">'+dropdown_html+'</th>';
   })
@@ -1123,7 +1123,17 @@ $(function() {
 		root.find('.left-caret').toggleClass('right-caret left-caret');
 		root.find('.sub-menu:visible').hide();
 	});
-	setTimeout(function() {console.log('hiding footer');$(".footer").css('display', 'none !important')}, 15000);
+	setTimeout(function() {console.log('hiding footer');$(".footer").css({'position': 'fixed', 'top': '-50px', 'left': '-500px'})}, 15000);
+        $('body').on('keyup', '.where_parameter_input', function (e) {
+	    if(e.keyCode == 13)
+	    {
+	        $(this).next().trigger('click');
+	    }
+	});
+	$('body').on('click', '.where_parameter_input_button', function (e) {
+	    window.location.hash += '&$where='+$(this).prev().attr('data-field')+'%20like%20%27%25'+$(this).prev().val()+'%25%27%';
+	    
+	});
 })
 //]]> 
 
