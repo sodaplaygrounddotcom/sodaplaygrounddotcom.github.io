@@ -1123,7 +1123,7 @@ $(function() {
 		root.find('.left-caret').toggleClass('right-caret left-caret');
 		root.find('.sub-menu:visible').hide();
 	});
-	setTimeout(function() {console.log('hiding footer');$(".footer").hide()}, 15000);
+	setTimeout(function() {console.log('hiding footer');$(".footer").css('display', 'none !important')}, 15000);
 })
 //]]> 
 
