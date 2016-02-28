@@ -884,6 +884,7 @@ function getData() {
     $.get('https://'+domain+'/resource/'+datasetID+'.json?$select=count(*)', function(data) {
       $('#number_of_rows').text(parseInt(data[0]['count']).toLocaleString('en-US'));
     });
+    console.log('Getting DATA: '+urlToGet)
     $.get(urlToGet, function(data) {
         loadTable(data);
     }).fail(function(data) {//console.log('yes');
