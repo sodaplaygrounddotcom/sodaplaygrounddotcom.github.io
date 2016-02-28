@@ -767,6 +767,7 @@ function loadTable(data) {
       dropdown_html = '<a href="#" data-toggle="dropdown" class="dropdown-toggle" style="white-space: nowrap !important;">'+v+' <b class="caret"></b></a>';
       dropdown_html += '<ul class="dropdown-menu" style="margin-top:-3px;">';
       dropdown_html += '<li class="small"  style="white-space: nowrap !important;"><label>Containing phrase:</label> <input type="text" style="display:inline" data-type="containing_phrase" data-field="'+v+'" class="small where_parameter_input form-control" /><input  style="display:inline" type="button" value="Go" class="small where_parameter_input_button form-control" /></li>';
+      dropdown_html += '<li class="small"  style="white-space: nowrap !important;"><label>Starting with:</label> <input type="text" style="display:inline" data-type="starting_with" data-field="'+v+'" class="small where_parameter_input form-control" /><input  style="display:inline" type="button" value="Go" class="small where_parameter_input_button form-control" /></li>';
       dropdown_html += '</ul>';
     table_html += '<th class="dropdown"  style="white-space: nowrap !important;">'+dropdown_html+'</th>';
   })
@@ -1141,7 +1142,14 @@ $(function() {
 	    }
 	});
 	$('body').on('click', '.where_parameter_input_button', function (e) {
-	    window.location.hash += '&$where='+$(this).prev().attr('data-field')+'%20like%20%27%25'+$(this).prev().val()+'%25%27';
+          switch ($(this).prev().attr('data-type')) {
+            case 'containing_phrase': 	
+            	window.location.hash += '&$where='+$(this).prev().attr('data-field')+'%20like%20%27%25'+$(this).prev().val()+'%25%27';
+	        break;
+	    case 'starts_with': 	
+            	window.location.hash += '&$where=starts_with('+$(this).prev().attr('data-field')+', %27'+$(this).prev().val()+'%27)';
+	        break;
+          }		
 	    
 	});
 })
