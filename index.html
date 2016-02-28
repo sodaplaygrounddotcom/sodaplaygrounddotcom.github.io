@@ -757,7 +757,7 @@ function loadTable(data) {
       }
       dropdown_html = '<a href="#" data-toggle="dropdown" class="dropdown-toggle" style="white-space: nowrap !important;">'+v+' <b class="caret"></b></a>';
       dropdown_html += '<ul class="dropdown-menu" style="margin-top:-3px;">';
-      dropdown_html += '<li class="small"  style="white-space: nowrap !important;"><label>Containing phrase:</label> <input type="text" data-type="containing_phrase" data-field="'+v+'" class="small where_parameter_input form-control" /><input type="button" value="Go" class="small where_parameter_input form-control" /></li>';
+      dropdown_html += '<li class="small"  style="white-space: nowrap !important;"><label>Containing phrase:</label> <input type="text" style="display:inline" data-type="containing_phrase" data-field="'+v+'" class="small where_parameter_input form-control" /><input  style="display:inline" type="button" value="Go" class="small where_parameter_input form-control" /></li>';
       dropdown_html += '</ul>';
     table_html += '<th class="dropdown"  style="white-space: nowrap !important;">'+dropdown_html+'</th>';
   })
