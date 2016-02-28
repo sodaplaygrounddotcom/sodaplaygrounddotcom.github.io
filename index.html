@@ -609,6 +609,10 @@ the words “steals” and “bicycles” in different columns of a given record
 </div>
 </div>
 <script type='text/javascript'>//<![CDATA[
+$.ajaxSetup({
+    // Disable caching of AJAX responses
+    cache: false
+});
 window.domainsShown = [];
 function dataPortalModal(domain, icon) {
 	$("#dataPortalModal h4").html('<img src="'+icon+'" style="width:20px;height:20px;" /> '+domain);
