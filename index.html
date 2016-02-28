@@ -1141,7 +1141,7 @@ $(function() {
 	    }
 	});
 	$('body').on('click', '.where_parameter_input_button', function (e) {
-	    window.location.hash += '&$where='+$(this).prev().attr('data-field')+'%20like%20%27%25'+$(this).prev().val()+'%25%27%';
+	    window.location.hash += '&$where='+$(this).prev().attr('data-field')+'%20like%20%27%25'+$(this).prev().val()+'%25%27';
 	    
 	});
 })
