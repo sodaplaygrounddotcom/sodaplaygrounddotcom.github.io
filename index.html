@@ -759,7 +759,7 @@ function loadTable(data) {
       dropdown_html += '<ul class="dropdown-menu">';
       dropdown_html += '<li><a href="#" class="small">Inbox</a></li>';
       dropdown_html += '</ul>';
-    table_html += '<th class="dropdown">'+dropdown_html+'</th>';
+    table_html += '<th class="dropdown"  style="white-space: nowrap !important;">'+dropdown_html+'</th>';
   })
   table_html += '</tr>';
   $.each(data, function(i, row) {
