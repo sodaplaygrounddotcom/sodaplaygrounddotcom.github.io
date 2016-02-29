@@ -768,6 +768,7 @@ function loadTable(data) {
       dropdown_html += '<ul class="dropdown-menu" style="margin-top:-3px;">';
       dropdown_html += '<li class="small"  style="white-space: nowrap !important;"><label>Containing phrase:</label> <input type="text" style="display:inline" data-type="containing_phrase" data-field="'+v+'" class="small where_parameter_input form-control" /><input  style="display:inline" type="button" value="Go" class="small where_parameter_input_button form-control" /></li>';
       dropdown_html += '<li class="small"  style="white-space: nowrap !important;"><label>Starts with:</label> <input type="text" style="display:inline" data-type="starts_with" data-field="'+v+'" class="small where_parameter_input form-control" /><input  style="display:inline" type="button" value="Go" class="small where_parameter_input_button form-control" /></li>';
+      dropdown_html += '<li class="small"  style="white-space: nowrap !important;"><a href="#" class="query_button" data-type="group_with_count_ordered_by_count_desc" data-field="'+v+'" />Group with count ordered by count DESC</a></li>';
       dropdown_html += '</ul>';
     table_html += '<th class="dropdown"  style="white-space: nowrap !important;">'+dropdown_html+'</th>';
   })
@@ -1152,6 +1153,13 @@ $(function() {
           }		
 	    
 	});
+	$('body').on('click', '.query_button', function (e){
+		e.preventDefault();
+		switch ($(this).attr('data-type')) {
+			case 'group_with_count_ordered_by_count_desc':
+				window.location = 'https://'+domain+'/resource/'+datasetID+'.json?$select='+$(this).attr('data-field')+',count(*)&$group='+$(this).attr('data-field')+'&$order=count(*)%20DESC';
+		}               break;
+	})
 })
 //]]> 
 
