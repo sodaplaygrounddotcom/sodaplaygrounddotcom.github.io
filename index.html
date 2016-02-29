@@ -252,7 +252,7 @@ a.filter_url:link, a.filter_url:visited {
   
     
 
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDNPxHC_Pn-EKRM-r7wVj4rfWa2n_DdGyw&sensor=false"></script>
         
         <script type="text/javascript">
         window.markers = [];
@@ -782,7 +782,7 @@ function loadTable(data) {
         } else if (fields.indexOf('location_city') > -1) {
           ending = ', '+row['location_city']+', '+row['location_state'];
         }
-        table_html += '<td><img src="https://maps.googleapis.com/maps/api/streetview?size=100x100&location='+row['address']+ending+'" /></td>';
+        table_html += '<td><img src="https://maps.googleapis.com/maps/api/streetview?key=AIzaSyDNPxHC_Pn-EKRM-r7wVj4rfWa2n_DdGyw&size=100x100&location='+row['address']+ending+'" /></td>';
       }
       table_html += '<td>';
       if (window.location.hash.indexOf('?') > -1) {
