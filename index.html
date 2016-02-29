@@ -1158,7 +1158,8 @@ $(function() {
 		switch ($(this).attr('data-type')) {
 			case 'group_with_count_ordered_by_count_desc':
 				window.location = 'https://'+domain+'/resource/'+datasetID+'.json?$select='+$(this).attr('data-field')+',count(*)&$group='+$(this).attr('data-field')+'&$order=count(*)%20DESC';
-		}               break;
+		                break;
+		}
 	})
 })
 //]]> 
